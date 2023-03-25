@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Staff : MonoBehaviour
 {
-    private int id;
+    private int _id;
     public int ID
     {
-        get { return id;}
-        set { id = value; }
+        get { return _id;}
+        set { _id = value; }
     }
 
     private int charSkinId;
@@ -22,4 +22,28 @@ public class Staff : MonoBehaviour
 
     public string staffName;
     public int dailyWage;
+
+    public void InitCharID(int id)
+    {
+        _id = id;
+        charSkinId = Random.Range(0, charSkin.Length - 1);
+        staffName = "XXXX";
+        dailyWage = Random.Range(80, 125);
+    }
+
+    public void ChangeCharSkin()
+    {
+        for (int i = 0; i < charSkin.Length; i++)
+        {
+            if (i == charSkinId)
+            {
+                charSkin[i].SetActive(true);
+                
+            }
+            else
+            {
+                charSkin[i].SetActive(false);
+            }
+        }
+    }
 }
