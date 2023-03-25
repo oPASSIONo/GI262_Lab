@@ -11,6 +11,8 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float zoomSpeed;
     [SerializeField ]private float zoomModifier;
 
+    [SerializeField] private float moveSpeed;
+
     private Camera cam;
     private void Start()
     {
@@ -21,6 +23,8 @@ public class CameraController : MonoBehaviour
     private void Update()
     {
         Zoom();
+        
+        MoveByKB();
     }
 
 
@@ -41,6 +45,17 @@ public class CameraController : MonoBehaviour
         }
 
         cam.transform.position += cam.transform.forward * zoomModifier * zoomSpeed;
+
+    }
+
+    private void MoveByKB()
+    {
+        float xInput = Input.GetAxis("Horizontal");
+        float zInput = Input.GetAxis("Vertical");
+
+        Vector3 dir = transform.forward * zInput + transform.right * xInput;
+
+        transform.position += dir * moveSpeed * Time.deltaTime;
 
     }
 }
